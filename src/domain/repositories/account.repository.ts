@@ -6,6 +6,6 @@ export interface AccountRepository {
   findById(id: string): Promise<Account | null>;
   findAll(): Promise<Account[]>;
   create(account: Account): Promise<Account>;
-  update(id: string, account: Account): Promise<Account>;
-  delete(id: string): Promise<void>;
+  update(id: string, accountData: Partial<Account>): Promise<Account>;
+  softDelete(id: string): Promise<void>;
 }

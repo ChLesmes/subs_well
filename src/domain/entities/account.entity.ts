@@ -15,4 +15,8 @@ export class Account {
     this.subscriptions = subscriptions;
     this.deleted = deleted;
   }
+
+  markAsDeleted() {
+    this.deleted = true;
+  }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AccountRepository } from '../../domain/repositories/account.repository';
 import { Account } from '../../domain/entities/account.entity';
 import { Model } from 'mongoose';
@@ -9,11 +9,15 @@ export class AccountRepositoryImpl implements AccountRepository {
   constructor(@InjectModel(Account.name) private accountModel: Model<Account>) {}
 
   async findById(id: string): Promise<Account | null> {
-    return this.accountModel.findById(id).exec();
+    const account = await this.accountModel.findOne({_id: id, deleted: { $ne: true }}).exec();
+    if (!account) {
+      throw new NotFoundException('Account not found');
+    }
+    return account;
   }
 
   async findAll(): Promise<Account[]> {
-    return this.accountModel.find().exec();
+    return this.accountModel.find({deleted: { $ne: true }}).exec();
   }
 
   async create(account: Account): Promise<Account> {
@@ -21,11 +25,18 @@ export class AccountRepositoryImpl implements AccountRepository {
     return newAccount.save();
   }
 
-  async update(id: string, account: Account): Promise<Account> {
-    return this.accountModel.findByIdAndUpdate(id, account, { new: true }).exec();
+  async update(id: string, accountData: Partial<Account>): Promise<Account> {
+    const updatedAccount = await this.accountModel.findOneAndUpdate({_id: id, deleted: { $ne: true }}, accountData, { new: true }).exec();
+    if (!updatedAccount) {
+      throw new NotFoundException('Account not found');
+    }
+    return updatedAccount;
   }
 
-  async delete(id: string): Promise<void> {
-    await this.accountModel.findByIdAndDelete(id).exec();
+  async softDelete(id: string): Promise<void> {
+    const deleteAccount = await this.accountModel.findOneAndUpdate({_id: id, deleted: { $ne: true }}, { deleted: true }).exec();
+    if (!deleteAccount) {
+      throw new NotFoundException('Account not found');
+    }
   }
 }

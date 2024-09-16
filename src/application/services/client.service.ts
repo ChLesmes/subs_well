@@ -21,7 +21,7 @@ export class ClientService implements IClientService {
 
   async registerClient(createClientDto: CreateClientDto): Promise<Client> {
     try {
-      const account = await this.accountService.getAccountDetails(createClientDto.account.toString());      
+      const account = await this.accountService.getById(createClientDto.account.toString());      
       if (!account) throw new BadRequestException('Account does not exists');
       const client = new Client({name: createClientDto.name, email: createClientDto.email});
       return await this.clientRepository.create(client);

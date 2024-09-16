@@ -7,5 +7,5 @@ export interface ClientRepository {
   findAll(): Promise<Client[]>;
   create(client: Client): Promise<Client>;
   update(id: string, client: Client): Promise<Client>;
-  delete(id: string): Promise<void>;
+  // softDelete(id: string): Promise<void>;
 }
