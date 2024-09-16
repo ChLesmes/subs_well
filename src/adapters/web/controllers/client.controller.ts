@@ -1,16 +1,23 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { ClientService } from '../../../application/services/client.service';
 import { CreateClientDto } from '../dtos/client/create-client.dto';
 import { handleExceptions } from 'src/common/helpers/handleExceptions';
 import { ResponseClientDto } from '../dtos/client/response-client.dto';
 import { UpdateClientDto } from '../dtos/client/update-client.dto';
 import { UpdateClientSubscriptionDto } from '../dtos/client/update-client-subscription.dto';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Clients')
 @Controller('clients')
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Post()
+  @ApiResponse({
+    status: HttpStatus.CREATED, 
+    description: 'Client was created',
+    type: ResponseClientDto,
+  })
   async create(@Body() createClientDto: CreateClientDto) {
     try {
       const client = await this.clientService.create(createClientDto);
@@ -21,6 +28,11 @@ export class ClientController {
   }
 
   @Get()
+  @ApiResponse({
+    status: HttpStatus.OK, 
+    description: 'Clients was returned',
+    type: [ResponseClientDto],
+  })
   async getAll() {
     try {
       const clients = await this.clientService.getAll();
@@ -31,6 +43,11 @@ export class ClientController {
   }
 
   @Get(':id')
+  @ApiResponse({
+    status: HttpStatus.OK, 
+    description: 'Client was returned',
+    type: ResponseClientDto,
+  })
   async getById(@Param('id') id: string) {
     try {
       const client = await this.clientService.getById(id);
@@ -41,6 +58,11 @@ export class ClientController {
   }
 
   @Put(':id')
+  @ApiResponse({
+    status: HttpStatus.OK, 
+    description: 'Client was updated',
+    type: ResponseClientDto,
+  })
   async updateClient(@Param('id') id: string, @Body() updateClientDto: UpdateClientDto) {
     try {
       const updatedClient = await this.clientService.update(id, updateClientDto);
@@ -51,6 +73,11 @@ export class ClientController {
   }
 
   @Delete(':id')
+  @ApiResponse({
+    status: HttpStatus.OK, 
+    description: 'Client was deleted',
+    type: String,
+  })
   async delete(@Param('id') id: string) {
     try {
       await this.clientService.softDelete(id);
@@ -61,6 +88,11 @@ export class ClientController {
   }
 
   @Put(':id/subscription')
+  @ApiResponse({
+    status: HttpStatus.OK, 
+    description: 'Client Subscription was added or updated',
+    type: ResponseClientDto,
+  })
   async enableSubscription(
     @Param('id') id: string,
     @Body() subscriptionData: UpdateClientSubscriptionDto

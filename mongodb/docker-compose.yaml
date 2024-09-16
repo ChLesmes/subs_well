@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mongodb:
+    container_name: subs-well-mongodb
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - ./dump:/home/dump
+      - ./mongo:/data/db
+    ports:
+      - '27017:27017'
+    logging:
+      driver: none
+    networks:
+      - subs-well-network
+
+networks:
+  subs-well-network:

@@ -1,26 +1,22 @@
-import { isValidObjectId, Types } from "mongoose";
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { Transform } from "class-transformer";
-import { BadRequestException } from "@nestjs/common";
+import { IsNotEmpty, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 
 export class CreateClientDto {
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   readonly name: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   readonly email: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  // @Transform(({ value }) => {
-  //   if (!value) return;
-  //   if (!isValidObjectId(value)) throw new BadRequestException('Account is not a valid ObjectId');
-  //   return new Types.ObjectId(value);
-  // })
-  readonly accountId?: string;
+  readonly accountId: string;
 
 }

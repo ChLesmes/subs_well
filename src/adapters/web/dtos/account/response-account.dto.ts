@@ -1,13 +1,23 @@
+import { ApiProperty } from '@nestjs/swagger';
+
+class AccountSubscription {
+  @ApiProperty()
+  id: string;
+  @ApiProperty()
+  type: string;
+  @ApiProperty()
+  state: string;
+}
 
 export class ResponseAccountDto {
+  @ApiProperty()
   readonly id: string;
+  @ApiProperty()
   readonly name: string;
+  @ApiProperty()
   readonly type: string;
-  readonly subscription?: {
-    id: string;
-    type: string;
-    state: string;
-  } | string;
+  @ApiProperty({nullable: true, type: AccountSubscription})
+  readonly subscription?: AccountSubscription | string;
 
   constructor(account: any) {
     this.id = account._id;
