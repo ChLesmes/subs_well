@@ -39,12 +39,15 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+El api se ejecutará por defecto en **http://localhost:3000/api/v1/**
+
+
+<!-- ## Test
 
 ```bash
 # unit tests
 $ npm run test
-```
+``` -->
 
 ## Documentación
 
