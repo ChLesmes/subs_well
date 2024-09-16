@@ -48,5 +48,4 @@ $ npm run test
 
 ## Documentación
 
-- ### Accounts
-  - /api/v1/accounts
+La documentación del API está creada con Swagger y disponible en ```/api``` (por defecto **http://localhost:3000/api**)
