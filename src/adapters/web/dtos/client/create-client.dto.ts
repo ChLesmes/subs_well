@@ -14,12 +14,13 @@ export class CreateClientDto {
   @IsNotEmpty()
   readonly email: string;
 
+  @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => {
-    if (!value) return;
-    if (!isValidObjectId(value)) throw new BadRequestException('Account is not a valid ObjectId');
-    return new Types.ObjectId(value);
-  })
-  readonly account?: Types.ObjectId;
+  // @Transform(({ value }) => {
+  //   if (!value) return;
+  //   if (!isValidObjectId(value)) throw new BadRequestException('Account is not a valid ObjectId');
+  //   return new Types.ObjectId(value);
+  // })
+  readonly accountId?: string;
 
 }

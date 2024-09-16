@@ -1,11 +1,9 @@
-import { Account } from "../entities/account.entity";
-import { Subscription } from "../entities/subscription.entity";
 
 export interface IClient {
-  id?: string;
+  _id?: string;
   name: string;
   email: string;
-  account?: Account;
-  subscriptions?: Subscription[];
+  accountId?: string;
+  subscriptionIds?: string[];
   deleted?: boolean;
 }

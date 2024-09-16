@@ -5,6 +5,10 @@ import { Document } from "mongoose";
 export class Addon extends Document {
   @Prop({ required: true })
   name: string;
+  @Prop()
+  apiKey?: string;
+  @Prop()
+  secretKey?: string;
   @Prop({ default: false })
   deleted: boolean;
 }

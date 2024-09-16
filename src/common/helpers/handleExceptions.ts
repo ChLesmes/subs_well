@@ -10,6 +10,6 @@ export const handleExceptions = (error: any): void => {
   if (error.code === 11000) {
     throw new BadRequestException(error.message);
   }
-  console.log(error);
+  console.error(error);
   throw new InternalServerErrorException(error.detail || error.message);
 };

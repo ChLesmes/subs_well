@@ -9,7 +9,13 @@ export class AccountRepositoryImpl implements AccountRepository {
   constructor(@InjectModel(Account.name) private accountModel: Model<Account>) {}
 
   async findById(id: string): Promise<Account | null> {
-    const account = await this.accountModel.findOne({_id: id, deleted: { $ne: true }}).exec();
+    const account = await this.accountModel
+      .findOne({_id: id, deleted: { $ne: true }})
+      .populate({
+        path: 'subscriptionId',
+        select: ['state', 'type'],
+      })
+      .exec();
     if (!account) {
       throw new NotFoundException('Account not found');
     }

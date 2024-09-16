@@ -4,6 +4,7 @@ import { CreateAccountDto } from '../dtos/account/create-account.dto';
 import { UpdateAccountDto } from '../dtos/account/update-account.dto';
 import { ResponseAccountDto } from '../dtos/account/response-account.dto';
 import { handleExceptions } from 'src/common/helpers/handleExceptions';
+import { UpdateAccountSubscriptionDto } from '../dtos/account/update-account-subscription.dto';
 
 @Controller('accounts')
 export class AccountController {
@@ -54,6 +55,19 @@ export class AccountController {
     try {
       await this.accountService.softDelete(id);
       return { message: 'Account deleted successfully' };
+    } catch (error: unknown) {
+      handleExceptions(error);
+    }
+  }
+
+  @Put(':id/subscription')
+  async enableSubscription(
+    @Param('id') id: string,
+    @Body() subscriptionData: UpdateAccountSubscriptionDto
+  ) {
+    try {
+      const account = await this.accountService.changeSubscription(id, subscriptionData);
+      return new ResponseAccountDto(account);
     } catch (error: unknown) {
       handleExceptions(error);
     }

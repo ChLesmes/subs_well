@@ -1,10 +1,8 @@
-import { Account } from "../entities/account.entity";
 import { Subscription } from "../entities/subscription.entity";
 
 export interface IAccount {
-  id?: string;
+  _id?: string;
   name: string;
-  type: string;
-  subscriptions?: Subscription;
+  subscriptionId?: string;
   deleted?: boolean;
 }

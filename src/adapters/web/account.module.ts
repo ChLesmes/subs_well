@@ -7,6 +7,7 @@ import { AccountService } from '../../application/services/account.service';
 import { AccountRepositoryImpl } from '../../infrastructure/repositories/account.repository.impl';
 import { Account, AccountSchema } from 'src/infrastructure/db/schema/account.schema';
 import { ACCOUNT_REPOSITORY } from 'src/domain/repositories/account.repository';
+import { SubscriptionModule } from './subscription.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ACCOUNT_REPOSITORY } from 'src/domain/repositories/account.repository';
         schema: AccountSchema,
       },
     ]),
+    SubscriptionModule
   ],
   controllers: [AccountController],
   providers: [
@@ -26,6 +28,6 @@ import { ACCOUNT_REPOSITORY } from 'src/domain/repositories/account.repository';
       useClass: AccountRepositoryImpl,
     },
   ],
-  exports: [AccountService]
+  exports: [AccountService],
 })
 export class AccountModule {}

@@ -6,6 +6,7 @@ import { JoiValidationSchema } from './config/joi.validation';
 import { envConfiguration } from './config/configuration';
 import { AccountModule } from './adapters/web/account.module';
 import { ClientModule } from './adapters/web/client.module';
+import { SubscriptionModule } from './adapters/web/subscription.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ClientModule } from './adapters/web/client.module';
     }),
     AccountModule, 
     ClientModule,
+    SubscriptionModule,
   ],
   controllers: [],
   providers: [],

@@ -8,6 +8,7 @@ import { ClientRepositoryImpl } from '../../infrastructure/repositories/client.r
 import { Client, ClientSchema } from 'src/infrastructure/db/schema/client.schema';
 import { CLIENT_REPOSITORY, ClientRepository } from 'src/domain/repositories/client.repository';
 import { AccountModule } from './account.module';
+import { SubscriptionModule } from './subscription.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AccountModule } from './account.module';
       },
     ]),
     AccountModule,
+    SubscriptionModule,
   ],
   controllers: [ClientController],
   providers: [
@@ -28,5 +30,6 @@ import { AccountModule } from './account.module';
       useClass: ClientRepositoryImpl,
     },
   ],
+  exports: [ClientService],
 })
 export class ClientModule {}

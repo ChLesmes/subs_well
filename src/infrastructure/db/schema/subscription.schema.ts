@@ -3,6 +3,7 @@ import { Document, Types } from "mongoose";
 import { Addon } from './addon.schema';
 import { SubscriptionTypes } from 'src/domain/enums/subscription-types.enum';
 import { States } from 'src/domain/enums/states';
+import { Account } from './account.schema';
 
 @Schema({timestamps: true})
 export class Subscription extends Document {
@@ -14,8 +15,8 @@ export class Subscription extends Document {
   totalAmount?: number;
   @Prop()
   amountSpent?: number;
-  @Prop({ type: Types.ObjectId, ref: Addon.name })
-  addon?: Types.ObjectId;
+  @Prop({ type: Types.ObjectId, ref: Addon.name, required: false })
+  addonId?: Types.ObjectId;
   @Prop({ default: false })
   deleted: boolean;
 }

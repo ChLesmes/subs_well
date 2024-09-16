@@ -2,11 +2,16 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { SubscriptionController } from './controllers/subscription.controller';
-import { SubscriptionService } from '../../application/services/subscription.service';
 import { SubscriptionRepositoryImpl } from '../../infrastructure/repositories/subscription.repository.impl';
 import { Subscription, SubscriptionSchema } from 'src/infrastructure/db/schema/subscription.schema';
 import { Addon, AddonSchema } from 'src/infrastructure/db/schema/addon.schema';
+import { AddonController } from './controllers/addon.controller';
+import { AddonService } from 'src/application/services/addon.service';
+import { SUBSCRIPTION_REPOSITORY } from 'src/domain/repositories/subscription.repository';
+import { ADDON_REPOSITORY } from 'src/domain/repositories/addon.repository';
+import { AddonRepositoryImpl } from 'src/infrastructure/repositories/addon.repository.impl';
+import { AccountModule } from './account.module';
+import { ClientModule } from './client.module';
 
 @Module({
   imports: [
@@ -22,13 +27,20 @@ import { Addon, AddonSchema } from 'src/infrastructure/db/schema/addon.schema';
       },
     ]),
   ],
-  controllers: [SubscriptionController],
+  controllers: [
+    AddonController
+  ],
   providers: [
-    SubscriptionService,
+    AddonService,
     {
-      provide: 'SubscriptionRepository',
+      provide: SUBSCRIPTION_REPOSITORY,
       useClass: SubscriptionRepositoryImpl,
     },
+    {
+      provide: ADDON_REPOSITORY,
+      useClass: AddonRepositoryImpl,
+    },
   ],
+  exports: [SUBSCRIPTION_REPOSITORY, AddonService],
 })
 export class SubscriptionModule {}

@@ -1,6 +1,13 @@
+import { CreateClientDto } from 'src/adapters/web/dtos/client/create-client.dto';
 import { Client } from '../../domain/entities/client.entity';
+import { UpdateClientDto } from 'src/adapters/web/dtos/client/update-client.dto';
+import { UpdateClientSubscriptionDto } from 'src/adapters/web/dtos/client/update-client-subscription.dto';
 
 export interface IClientService {
-  getClientDetails(id: string): Promise<Client>;
-  registerClient(clientData: any): Promise<Client>;
+  getAll(): Promise<Client[]>;
+  getById(id: string): Promise<Client>;
+  create(createClientDto: CreateClientDto): Promise<Client>;
+  update(id: string, updateClientDto: UpdateClientDto): Promise<Client>;
+  softDelete(id: string): Promise<void>;
+  changeSubscription(id: string, subscriptionData: UpdateClientSubscriptionDto): Promise<Client>;
 }

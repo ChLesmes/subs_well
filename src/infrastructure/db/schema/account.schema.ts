@@ -8,10 +8,8 @@ import { Subscription, SubscriptionSchema } from './subscription.schema';
 export class Account extends Document {
   @Prop({ required: true })
   name: string;
-  @Prop({ required: true })
-  type: string;
-  @Prop({ type: SubscriptionSchema, required: false })
-  subscriptions?: Subscription;
+  @Prop({ type: Types.ObjectId, ref: Subscription.name, required: false })
+  subscriptionId?: Types.ObjectId;
   @Prop({ default: false })
   deleted: boolean;
 }
