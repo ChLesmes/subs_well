@@ -70,8 +70,8 @@ La documentación de la API está generada con Swagger y disponible en `/api` (p
 
 ## Tecnologías Principales
 
-- NestJS v10
-- Node.js v20
+- NestJS
+- Node.js
 - Typescript
 - MongoDB
 - Mongoose
