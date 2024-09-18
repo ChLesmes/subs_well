@@ -72,8 +72,11 @@ La documentación de la API está generada con Swagger y disponible en `/api` (p
 
 - NestJS v10
 - Node.js v20
+- Typescript
 - MongoDB
 - Mongoose
+- Swagger
+- Jest
 
 ## Contribución
 
