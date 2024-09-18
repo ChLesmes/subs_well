@@ -7,34 +7,23 @@
 
 ## Descripción
 
-Prueba técnica donde se implementa un API siguiendo la arquitectura hexagonal y los principios SOLID, a travez de NestJs v10 sobre Node.Js v20.
+Este proyecto es una prueba técnica que implementa una API utilizando NestJS v10 sobre Node.js v20. Se ha seguido la arquitectura hexagonal y los principios SOLID.
 
 ## Arquitectura
 
-- ### Capa de dominio
-  Se definen las entidades del dominio, los enums y repositorios. 
+El proyecto está estructurado en cuatro capas principales:
 
-- ### Capa de aplicación
-  Se definen los casos de uso representados con los servicios de NestJs. 
+1. **Capa de Dominio**: Define las entidades del dominio, enums y repositorios.
+2. **Capa de Aplicación**: Contiene los casos de uso representados por los servicios de NestJS.
+3. **Capa de Infraestructura**: Configura la base de datos MongoDB y el ORM Mongoose, e implementa los repositorios.
+4. **Capa de Adaptadores**: Define los controladores, módulos y DTOs que actúan como punto de entrada al sistema.
 
-- ### Capa de infraestructura
-  Se definen y configura la base de datos ***Mongo*** y el ORM ***Mongoose***, tambien se implementan los repositorios. 
+## Patrones de Diseño
 
-- ### Capa de adaptadores
-  Se definen los controladores, modulos y dtos que serán la puerta de entrada del sistema. 
-
-## Patrones de diseño
-
-- ### Inyección de Dependencias:
-  Es un patrón que incorpora NestJs y usa a lo largo de la aplicación logrando una invesión del control entre clases y sus dependencias.
-
-- ### Repositorio:
-  Este patrón se usa como base en la arquitectura hexagonal para proteger el dominio, está implementado claramente entre la capa del Dominio y la infraestructura.
-
-- ### Data Transfer Object: 
-  Se usa para capturar y validar los datos de entrada a travez del API, usado en la capa de adaptadores.
-
-Ademas de estos, tambien tenemos otros patrones de diseño que nos obliga a implementar ***NestJS*** como Module, Singleton o Factory.
+- **Inyección de Dependencias**: Utilizado para lograr inversión de control entre las clases y sus dependencias.
+- **Repositorio**: Implementado entre la capa de Dominio e Infraestructura.
+- **Data Transfer Object (DTO)**: Usado en la capa de adaptadores para validar datos de entrada.
+- **Otros**: Module, Singleton y Factory, implementados por NestJS.
 
 ## Instalación
 
@@ -44,19 +33,19 @@ $ cd subs_well/
 $ npm install
 ```
 
-## Primeros Pasos
+## Configuración Inicial
 
-Clonar la plantilla de las variables de entorno
-```bash
-$ cp .env.template .env
-```
+1. Clonar el archivo de variables de entorno:
+   ```bash
+   cp .env.template .env
+   ```
 
-Ejecutar en un contenedor una instancia de mongo
-```bash
-$ docker-compose -f mongodb/docker-compose.yaml up -d --build
-```
+2. Iniciar una instancia de MongoDB en Docker:
+   ```bash
+   docker-compose -f mongodb/docker-compose.yaml up -d --build
+   ```
 
-## Correr la App
+## Ejecución
 
 ```bash
 # Desarrollo
@@ -65,16 +54,31 @@ $ npm run start:dev
 # Producción
 $ npm run start:prod
 ```
-El api estará disponiblé en ```/api/v1``` (por defecto en **http://localhost:3000/api/v1/**)
+La API estará disponible en `/api/v1` (por defecto en http://localhost:3000/api/v1/)
 
 
-<!-- ## Test
+## Pruebas
 
 ```bash
-# unit tests
+# Pruebas unitarias
 $ npm run test
-``` -->
+```
 
 ## Documentación
 
-La documentación del API está creada con Swagger y disponible en ```/api``` (por defecto **http://localhost:3000/api**)
+La documentación de la API está generada con Swagger y disponible en `/api` (por defecto en http://localhost:3000/api)
+
+## Tecnologías Principales
+
+- NestJS v10
+- Node.js v20
+- MongoDB
+- Mongoose
+
+## Contribución
+
+Las contribuciones son bienvenidas. Por favor, abre un issue o realiza un pull request para sugerir cambios o mejoras.
+
+## Licencia
+
+[MIT](LICENSE)

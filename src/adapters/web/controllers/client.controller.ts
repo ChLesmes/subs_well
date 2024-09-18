@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { ClientService } from '../../../application/services/client.service';
 import { CreateClientDto } from '../dtos/client/create-client.dto';
-import { handleExceptions } from 'src/common/helpers/handleExceptions';
+import { handleExceptions } from '../../../common/helpers/handleExceptions';
 import { ResponseClientDto } from '../dtos/client/response-client.dto';
 import { UpdateClientDto } from '../dtos/client/update-client.dto';
 import { UpdateClientSubscriptionDto } from '../dtos/client/update-client-subscription.dto';
@@ -15,7 +15,7 @@ export class ClientController {
   @Post()
   @ApiResponse({
     status: HttpStatus.CREATED, 
-    description: 'Client was created',
+    description: 'Client was created if the account has an active subscription',
     type: ResponseClientDto,
   })
   async create(@Body() createClientDto: CreateClientDto) {
@@ -30,7 +30,7 @@ export class ClientController {
   @Get()
   @ApiResponse({
     status: HttpStatus.OK, 
-    description: 'Clients was returned',
+    description: 'Clients with their account and subscriptions was returned (subscriptions will only be returned if the account has an active subscription)',
     type: [ResponseClientDto],
   })
   async getAll() {
@@ -45,7 +45,7 @@ export class ClientController {
   @Get(':id')
   @ApiResponse({
     status: HttpStatus.OK, 
-    description: 'Client was returned',
+    description: 'Client with their account and subscriptions was returned (subscriptions will only be returned if the account has an active subscription)',
     type: ResponseClientDto,
   })
   async getById(@Param('id') id: string) {
@@ -90,7 +90,7 @@ export class ClientController {
   @Put(':id/subscription')
   @ApiResponse({
     status: HttpStatus.OK, 
-    description: 'Client Subscription was added or updated',
+    description: 'The client subscription was created or updated only if the client account has an active subscription and the account is not deleted',
     type: ResponseClientDto,
   })
   async enableSubscription(

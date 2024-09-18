@@ -1,6 +1,6 @@
-import { CreateAddonDto } from 'src/adapters/web/dtos/addon/create-addon.dto';
+import { CreateAddonDto } from '../../adapters/web/dtos/addon/create-addon.dto';
 import { Addon } from '../../domain/entities/addon.entity';
-import { UpdateAddonDto } from 'src/adapters/web/dtos/addon/update-addon.dto';
+import { UpdateAddonDto } from '../../adapters/web/dtos/addon/update-addon.dto';
 
 export interface IAddonService {
   getAll(): Promise<Addon[]>;

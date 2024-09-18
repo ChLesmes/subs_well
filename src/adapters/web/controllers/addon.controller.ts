@@ -3,7 +3,7 @@ import { AddonService } from '../../../application/services/addon.service';
 import { CreateAddonDto } from '../dtos/addon/create-addon.dto';
 import { UpdateAddonDto } from '../dtos/addon/update-addon.dto';
 import { ResponseAddonDto } from '../dtos/addon/response-addon.dto';
-import { handleExceptions } from 'src/common/helpers/handleExceptions';
+import { handleExceptions } from '../../../common/helpers/handleExceptions';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Addons')

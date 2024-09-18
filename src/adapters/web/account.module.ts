@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AccountController } from './controllers/account.controller';
 import { AccountService } from '../../application/services/account.service';
 import { AccountRepositoryImpl } from '../../infrastructure/repositories/account.repository.impl';
-import { Account, AccountSchema } from 'src/infrastructure/db/schema/account.schema';
-import { ACCOUNT_REPOSITORY } from 'src/domain/repositories/account.repository';
+import { Account, AccountSchema } from '../../infrastructure/db/schema/account.schema';
+import { ACCOUNT_REPOSITORY } from '../../domain/repositories/account.repository';
 import { SubscriptionModule } from './subscription.module';
 
 @Module({

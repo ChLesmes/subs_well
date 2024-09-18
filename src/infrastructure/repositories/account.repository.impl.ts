@@ -23,7 +23,12 @@ export class AccountRepositoryImpl implements AccountRepository {
   }
 
   async findAll(): Promise<Account[]> {
-    return this.accountModel.find({deleted: { $ne: true }}).exec();
+    return this.accountModel.find({deleted: { $ne: true }})
+      .populate({
+        path: 'subscriptionId',
+        select: ['state', 'type'],
+      })
+      .exec();
   }
 
   async create(account: Account): Promise<Account> {
@@ -32,7 +37,13 @@ export class AccountRepositoryImpl implements AccountRepository {
   }
 
   async update(id: string, accountData: Partial<Account>): Promise<Account> {
-    const updatedAccount = await this.accountModel.findOneAndUpdate({_id: id, deleted: { $ne: true }}, accountData, { new: true }).exec();
+    const updatedAccount = await this.accountModel
+      .findOneAndUpdate({_id: id, deleted: { $ne: true }}, accountData, { new: true })
+      .populate({
+        path: 'subscriptionId',
+        select: ['state', 'type'],
+      })
+      .exec();
     if (!updatedAccount) {
       throw new NotFoundException('Account not found');
     }

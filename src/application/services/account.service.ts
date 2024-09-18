@@ -1,13 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IAccountService } from '../interfaces/IAccountService';
 import { AccountRepository, ACCOUNT_REPOSITORY } from '../../domain/repositories/account.repository';
-import { Account } from 'src/domain/entities/account.entity';
+import { Account } from '../../domain/entities/account.entity';
 import { CreateAccountDto } from '../../adapters/web/dtos/account/create-account.dto';
-import { UpdateAccountDto } from 'src/adapters/web/dtos/account/update-account.dto';
-import { SUBSCRIPTION_REPOSITORY, SubscriptionRepository } from 'src/domain/repositories/subscription.repository';
-import { States } from 'src/domain/enums/states';
-import { UpdateAccountSubscriptionDto } from 'src/adapters/web/dtos/account/update-account-subscription.dto';
-import { Subscription } from 'src/domain/entities/subscription.entity';
+import { UpdateAccountDto } from '../../adapters/web/dtos/account/update-account.dto';
+import { SUBSCRIPTION_REPOSITORY, SubscriptionRepository } from '../../domain/repositories/subscription.repository';
+import { UpdateAccountSubscriptionDto } from '../../adapters/web/dtos/account/update-account-subscription.dto';
+import { Subscription } from '../../domain/entities/subscription.entity';
 
 @Injectable()
 export class AccountService implements IAccountService {
@@ -45,6 +44,7 @@ export class AccountService implements IAccountService {
     let account = await this.accountRepository.findById(id);
     if(account.subscriptionId) {
       await this.subscriptionRepository.update(account.subscriptionId, {...subscriptionData});
+      account = await this.accountRepository.findById(id);
     } else {
       const subscription = new Subscription({...subscriptionData});
       const subscriptionDb = await this.subscriptionRepository.create(subscription);

@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from "mongoose";
 import { Addon } from './addon.schema';
-import { SubscriptionTypes } from 'src/domain/enums/subscription-types.enum';
-import { States } from 'src/domain/enums/states';
-import { Account } from './account.schema';
+import { SubscriptionTypes } from '../../../domain/enums/subscription-types.enum';
+import { States } from '../../../domain/enums/states';
 
 @Schema({timestamps: true})
 export class Subscription extends Document {

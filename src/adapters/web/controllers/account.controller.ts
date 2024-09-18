@@ -4,7 +4,7 @@ import { AccountService } from '../../../application/services/account.service';
 import { CreateAccountDto } from '../dtos/account/create-account.dto';
 import { UpdateAccountDto } from '../dtos/account/update-account.dto';
 import { ResponseAccountDto } from '../dtos/account/response-account.dto';
-import { handleExceptions } from 'src/common/helpers/handleExceptions';
+import { handleExceptions } from '../../../common/helpers/handleExceptions';
 import { UpdateAccountSubscriptionDto } from '../dtos/account/update-account-subscription.dto';
 
 @ApiTags('Accounts')

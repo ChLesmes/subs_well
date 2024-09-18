@@ -1,7 +1,7 @@
-import { CreateClientDto } from 'src/adapters/web/dtos/client/create-client.dto';
+import { CreateClientDto } from '../../adapters/web/dtos/client/create-client.dto';
 import { Client } from '../../domain/entities/client.entity';
-import { UpdateClientDto } from 'src/adapters/web/dtos/client/update-client.dto';
-import { UpdateClientSubscriptionDto } from 'src/adapters/web/dtos/client/update-client-subscription.dto';
+import { UpdateClientDto } from '../../adapters/web/dtos/client/update-client.dto';
+import { UpdateClientSubscriptionDto } from '../../adapters/web/dtos/client/update-client-subscription.dto';
 
 export interface IClientService {
   getAll(): Promise<Client[]>;

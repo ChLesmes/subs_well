@@ -1,8 +1,8 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ADDON_REPOSITORY, AddonRepository } from '../../domain/repositories/addon.repository';
-import { Addon } from 'src/domain/entities/addon.entity';
-import { CreateAddonDto } from 'src/adapters/web/dtos/addon/create-addon.dto';
-import { UpdateAddonDto } from 'src/adapters/web/dtos/addon/update-addon.dto';
+import { Addon } from '../../domain/entities/addon.entity';
+import { CreateAddonDto } from '../../adapters/web/dtos/addon/create-addon.dto';
+import { UpdateAddonDto } from '../../adapters/web/dtos/addon/update-addon.dto';
 import { IAddonService } from '../interfaces/IAddonService';
 
 @Injectable()
